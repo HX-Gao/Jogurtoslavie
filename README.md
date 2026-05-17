@@ -22,8 +22,8 @@ Vaším ultimátním úkolem je **do konce 12. tahu osvobodit Bělehrad** (kontr
 
 ## 🛠️ Použité technologie
 
-* **React (Hooks):** `useState` pro správu komplexního herního stavu (balíčky karet, kontrola oblastí, zdroje, historie).
-* **JavaScript (ES6+):** Herní a matematická logika, obsluha AI tahů.
+* **React:** `useState` pro správu komplexního herního stavu (balíčky karet, kontrola oblastí, zdroje, historie).
+* **JavaScript:** Herní a matematická logika, obsluha AI tahů.
 * **SVG / CSS:** Kompletní renderování mapy, responzivní design, vizuální efekty a custom UI.
 
 ## 🚀 Jak hru spustit lokálně
