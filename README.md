@@ -2,6 +2,12 @@
 
 > **Upozornění:** Tato hra je naprogramována **100% AI code**. Veškerý UI design, interaktivní SVG mapa i historické texty byly navrženy a naprogramovány umělou inteligencí.
 
+<p align="center">
+  <img src="docs/Jogurtoslavie.jpeg" width="100%" alt="Historická mapa Srbska">
+  <br>
+  <em>Historická předloha herní mapy (1941–1944)</em>
+</p>
+
 Jogurtoslávie je tahová strategická a karetní hra, která hráče přenese do drsného prostředí odboje na Balkáně během druhé světové války. Staňte se vůdcem partyzánů, provádějte sabotáže a připravte půdu pro finální osvobození Bělehradu!
 
 ## 🎯 Cíl hry
