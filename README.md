@@ -1,6 +1,6 @@
 # 🎮 JOGURTOSLÁVIE — Historická strategická hra (1941–1944)
 
-> **Upozornění:** Tato hra je  **80% AI code**. Veškerý UI design, interaktivní SVG mapa i historické texty byly navrženy a naprogramovány umělou inteligencí.
+> **Upozornění:** Tato hra je  **80% AI code**. Veškerý UI design, interaktivní SVG mapa i tahy Wehrmachtu byly navrženy a naprogramovány umělou inteligencí.
 
 <p align="center">
   <img src="docs/Jogurtoslavie.jpeg" width="100%" alt="Historická mapa Srbska">
