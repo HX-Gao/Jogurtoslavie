@@ -1,4 +1,4 @@
-# 🎮 JOGURTOSLÁVIE — Historická strategická hra (1941–1944)
+# JOGURTOSLÁVIE — Historická strategická hra (1941–1944)
 
 <p align="center">
   <img src="docs/Jogurtoslavie.jpeg" width="100%" alt="Historická mapa Srbska">
@@ -8,23 +8,17 @@
 
 Jogurtoslávie je tahová strategická a karetní hra, která hráče přenese do drsného prostředí odboje na Balkáně během druhé světové války. Staňte se vůdcem partyzánů, provádějte sabotáže a připravte půdu pro finální osvobození Bělehradu!
 
-## 🎯 Cíl hry
+## Cíl hry
 Vaším ultimátním úkolem je **do konce 12. tahu osvobodit Bělehrad** (kontrola nad městem musí být ≥3) a zároveň plně **kontrolovat alespoň 2 další oblasti** (celkem tedy ≥3 osvobozené zóny). 
 
-## ✨ Hlavní funkce
+## Hlavní funkce
 
-* 🗺️ **Interaktivní dynamická SVG mapa:** Hrací plocha je generována čistě pomocí SVG s vizuální zpětnou vazbou, barevným odlišením kontroly (od temně rudé nacistické okupace po zelenou svobodu).
-* 🃏 **Taktický karetní systém:** Během své fáze využíváte zdroje k hraní karet – od náboru dobrovolníků a zakládání táborů až po sabotáže německých posádek a cílené útoky.
-* 📜 **Bohaté historické události:** Každý z 12 tahů je vázán na konkrétní historickou událost (např. Operace Strafgericht, pád Užické republiky, kapitulace Itálie), které dynamicky mění stav hry a přidávají edukativní rozměr v přiloženém panelu "Historická fakta".
-* 🧠 **Automatizovaný Wehrmacht:** Německá AI v každém tahu logicky reaguje na vaše úspěchy – posiluje nejslabší zóny, provádí trestné výpravy do partyzánských oblastí a vyvíjí okupační tlak na civilní obyvatelstvo (snižuje morálku).
+* **Interaktivní dynamická SVG mapa:** Hrací plocha je generována čistě pomocí SVG s vizuální zpětnou vazbou, barevným odlišením kontroly (od temně rudé nacistické okupace po zelenou svobodu).
+* **Taktický karetní systém:** Během své fáze využíváte zdroje k hraní karet – od náboru dobrovolníků a zakládání táborů až po sabotáže německých posádek a cílené útoky.
+* **Bohaté historické události:** Každý z 12 tahů je vázán na konkrétní historickou událost (např. Operace Strafgericht, pád Užické republiky, kapitulace Itálie), které dynamicky mění stav hry a přidávají edukativní rozměr v přiloženém panelu "Historická fakta".
+* **Automatizovaný Wehrmacht:** Německá AI v každém tahu logicky reaguje na vaše úspěchy – posiluje nejslabší zóny, provádí trestné výpravy do partyzánských oblastí a vyvíjí okupační tlak na civilní obyvatelstvo (snižuje morálku).
 
-## 🛠️ Použité technologie
-
-* **React:** `useState` pro správu komplexního herního stavu (balíčky karet, kontrola oblastí, zdroje, historie).
-* **JavaScript:** Herní a matematická logika, obsluha AI tahů.
-* **SVG / CSS:** Kompletní renderování mapy, responzivní design, vizuální efekty a custom UI.
-
-## 🚀 Jak hru spustit lokálně
+## Jak hru spustit lokálně
 > **Upozornění:** Tento návod je **100% AI code**. Níže je odkaz na netlify pro přímé spouštění hry na počítači.
 
 Jelikož je hra tvořena jako čistá React komponenta, můžete ji snadno začlenit do jakéhokoliv existujícího React projektu (např. pomocí Vite, Next.js nebo Create React App).
@@ -56,9 +50,7 @@ npm run dev
 
 ```
 
-
-
-## 📜 Pravidla (Stručný přehled)
+## Pravidla (Stručný přehled)
 
 Hra se skládá ze 12 tahů. Každý tah má 3 fáze:
 
@@ -68,10 +60,11 @@ Hra se skládá ze 12 tahů. Každý tah má 3 fáze:
 
 Prohrajete, pokud vaše **Morálka klesne na 0**, nebo pokud po 12. tahu nedržíte Bělehrad a 2 další oblasti.
 
-## 📄 Licence
+## Licence
 
 Upravujte a šiřte svobodně!
 
 ## Odkaz na Netlify
+> pro spuštění hry přímo z počítače
 
 https://jogurtoslavie.netlify.app/
