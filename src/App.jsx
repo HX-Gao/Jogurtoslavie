@@ -71,7 +71,7 @@ const TURNS = [
     fLog:"📉 Prosinec 1941: Mohutná německá ofenzíva. Užice padlo, partyzáni ustupují do Bosny. Těžké ztráty.",
     fApply:g=>{const r={...g.regions};if(r.zap)r.zap={...r.zap,control:Math.max(-3,r.zap.control-2),garrison:Math.min(5,r.zap.garrison+2),bases:Math.max(0,r.zap.bases-1)};return{...g,regions:r,fighters:Math.max(3,g.fighters-4),morale:Math.max(0,g.morale-8)}},
     hTitle:"Pád Užické republiky (listopad–prosinec 1941)",
-    hText:"Partyzáni ovládli rozsáhlá území záp. Srbska a v Užici vyhlásili první svobodné territory – Užickou republiku (září–listopad 1941). Republika měla vlastní zbrojní továrnu (400 pušek/den), noviny a správní orgány. V listopadu 1941 zahájili Němci mohutnou ofenzívu. Tito byl nucen opustit Užice se ~4 500 bojovníky a ustoupit do Bosny. Tito a Mihailović se sešli dvakrát (26. 10. a 27. 11.), ale jejich jednání skončila neúspěchem kvůli ideologickým rozdílům. Četnické oddíly se stáhly z boje." },
+    hText:"Partyzáni ovládli rozsáhlá území záp. Srbska a v Užici vyhlásili první svobodné území – Užickou republiku (září–listopad 1941). Republika měla vlastní zbrojní továrnu (400 pušek/den), noviny a správní orgány. V listopadu 1941 zahájili Němci mohutnou ofenzívu. Tito byl nucen opustit Užice se ~4 500 bojovníky a ustoupit do Bosny. Tito a Mihailović se sešli dvakrát (26. 10. a 27. 11.), ale jejich jednání skončila neúspěchem kvůli ideologickým rozdílům. Četnické oddíly se stáhly z boje." },
   { n:5,  date:"Jaro 1942",      short:"Rok temna", hist:false,
     fLog:null, fApply:null,
     hTitle:"Rok 1942 – kolaborace četníků a reorganizace odboje",
@@ -110,7 +110,7 @@ const TURNS = [
     fLog:"⭐ 20. 10. 1944: BELGRADSKÁ OFENZÍVA! Sovětské tanky útočí. FINÁLNÍ PŘÍLEŽITOST – nyní nebo nikdy!",
     fApply:g=>{const r={...g.regions};if(r.belehrad)r.belehrad={...r.belehrad,garrison:Math.max(1,r.belehrad.garrison-2)};return{...g,regions:r,morale:Math.min(100,g.morale+10)}},
     hTitle:"Belgradská ofenzíva – Osvobození (14.–20. října 1944)",
-    hText:"Belgradská ofenzíva začala 14. října 1944 koordinovaným útokem sovětských a jugoslávských jednotek. Sovětská 4. gardová mechanizovaná armáda útočila ze severovýchodu přes Pančevo, Titova 1. armáda z jihu a jihozápadu. Německá Armádní skupina F bránila Bělehrad statečně. Po šesti dnech krutých pouličních bojů byl Bělehrad 20. října 1944 osvobozen. Sovětské velení omezilo těžké dělostřelectvo, aby ochránilo historická centra – za cenu mnoha vojáků. Josip Broz Tito slavnostně vstoupil do osvobozeného hlavního města. Osvobozením Bělehradu byl zlomen německý vliv na Balkáně." },
+    hText:"Belgradská ofenzíva začala 14. října 1944 koordinovaným útokem sovětských a jugoslávských jednotek. Sovětský 4. gardový mechanizovaný sbor (součást 57. armády) útočil ze severovýchodu přes Pančevo, Titova 1. armáda z jihu a jihozápadu. Německá Armádní skupina F bránila Bělehrad statečně. Po šesti dnech krutých pouličních bojů byl Bělehrad 20. října 1944 osvobozen. Sovětské velení omezilo těžké dělostřelectvo, aby ochránilo historická centra – za cenu mnoha vojáků. Josip Broz Tito slavnostně vstoupil do osvobozeného hlavního města. Osvobozením Bělehradu byl zlomen německý vliv na Balkáně." },
 ];
 
 // ─── NÁHODNÉ UDÁLOSTI ────────────────────────────────────────────────────────
@@ -293,9 +293,26 @@ function playCard(g, card, rid) {
     }
     default: msg=`${card.name} použita.`;
   }
-  g2.hand=g2.hand.filter(c=>c._uid!==card._uid);
-  if(g2.deck.length>0){g2.hand=[...g2.hand,g2.deck[0]];g2.deck=g2.deck.slice(1);}
-  g2.actionsLeft-=1;
+  // Odstraň zahranou kartu z ruky
+  g2.hand = g2.hand.filter(c => c._uid !== card._uid);
+
+  // Dober náhradní kartu z balíčku (pokud zbývají)
+  if (g2.deck.length > 0) {
+    g2.hand = [...g2.hand, g2.deck[0]];
+    g2.deck = g2.deck.slice(1);
+  }
+
+  // ── RESET BALÍČKU ──────────────────────────────────────────────────
+  // Pokud jsou ruka i balíček prázdné (nastane cca v tahu 9–10),
+  // zamícháme kompletně nový balíček a rozdáme 4 karty.
+  if (g2.hand.length === 0 && g2.deck.length === 0) {
+    const fresh = shuf(CARDS.flatMap(c => Array.from({length:c.n}, () => ({...c, _uid:nuid()}))));
+    g2.hand = fresh.slice(0, 4);
+    g2.deck = fresh.slice(4);
+    g2 = addLog(g2, '🔄 Balíček vyčerpán – karty zamíchány a rozdány 4 nové!');
+  }
+
+  g2.actionsLeft -= 1;
   g2=addLog(g2,`   ↳ ${msg}`);
   g2=addLog(g2,`🃏 ${card.icon} ${card.name} hrána`);
   const r=checkVC(g2); if(r) g2.over=r;
@@ -584,10 +601,10 @@ export default function Jogurtoslavie() {
         {/* ── STŘED: KARTY (Zúženo na 210px) ── */}
         <div style={{width:210,flexShrink:0,display:"flex",flexDirection:"column",borderRight:`2px solid ${C.bord}`}}>
           <div style={{padding:"6px 10px",borderBottom:`1px solid ${C.bord}`,background:C.surf,flexShrink:0}}>
-            <span style={{fontSize:10,fontWeight:"bold",color:C.gold,letterSpacing:2,textTransform:"uppercase"}}>🃏 Karty ({G.hand.length})</span>
+            <span style={{fontSize:10,fontWeight:"bold",color:C.gold,letterSpacing:2,textTransform:"uppercase"}}>🃏 Karty ({G.hand.length}) <span style={{color:C.mut,fontWeight:"normal",letterSpacing:0}}>| balíček: {G.deck.length}</span></span>
           </div>
           <div style={{flex:1,padding:7,overflow:"auto",display:"flex",flexDirection:"column",gap:5}}>
-            {G.hand.length===0&&<div style={{color:C.dim,fontSize:11,textAlign:"center",paddingTop:20,lineHeight:1.8}}>Žádné karty<br/><span style={{fontSize:9}}>Balíček vyčerpán.</span></div>}
+            {G.hand.length===0&&G.deck.length===0&&<div style={{color:C.dim,fontSize:11,textAlign:"center",paddingTop:20,lineHeight:1.8}}>⌛ Míchám balíček…</div>}
             {G.hand.map(card => {
               const isSel=sel?._uid===card._uid;
               const dis=G.phase!=="player"||G.actionsLeft<=0;
